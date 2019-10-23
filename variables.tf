@@ -16,3 +16,8 @@ variable "tier" {
 variable "size" {
   description = "App Service Plan size."
 }
+
+variable "app_settings" {
+  description = "App Service's configuration values."
+  default     = {}
+}

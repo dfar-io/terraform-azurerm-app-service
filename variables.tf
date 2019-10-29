@@ -16,8 +16,11 @@ variable "tier" {
 variable "size" {
   description = "App Service Plan size."
 }
-
 variable "app_settings" {
   description = "App Service's configuration values."
   default     = {}
+}
+variable "always_on" {
+  description = "Whether the App Service should always be on (Basic or above required)."
+  default     = false
 }

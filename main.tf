@@ -15,4 +15,7 @@ resource "azurerm_app_service" "as" {
   resource_group_name = "${var.rg_name}"
   app_service_plan_id = "${azurerm_app_service_plan.asp.id}"
   app_settings        = "${var.app_settings}"
+  site_config {
+    always_on = "${var.always_on}"
+  }
 }

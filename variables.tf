@@ -24,3 +24,7 @@ variable "always_on" {
   description = "Whether the App Service should always be on (Basic or above required)."
   default     = false
 }
+variable "https_only" {
+  description = "Whether the App Service only allows HTTPS connections."
+  default     = false
+}

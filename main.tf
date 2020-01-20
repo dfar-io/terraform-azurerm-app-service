@@ -17,6 +17,18 @@ resource "azurerm_app_service" "as" {
   app_settings        = var.app_settings
   https_only          = var.https_only
   site_config {
-    always_on = var.always_on
+    always_on                 = var.always_on
+    use_32_bit_worker_process = var.tier == "Free" ? true : var.use_32_bit_worker_process
+    default_documents = [
+      "Default.htm",
+      "Default.html",
+      "Default.asp",
+      "index.htm",
+      "index.html",
+      "iisstart.htm",
+      "default.aspx",
+      "index.php",
+      "hostingstart.html",
+    ]
   }
 }

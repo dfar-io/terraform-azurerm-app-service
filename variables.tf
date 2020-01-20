@@ -28,3 +28,7 @@ variable "https_only" {
   description = "Whether the App Service only allows HTTPS connections."
   default     = false
 }
+variable "use_32_bit_worker_process" {
+  description = "Whether the App Service should use the 32-bit worker process (needed for free plans, will be overwritten if Free tier selected)."
+  default     = false
+}

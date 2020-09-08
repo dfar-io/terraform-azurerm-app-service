@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "azurerm"
+      version = "~> 2.26"
+    }
+  }
+}
+
 resource "azurerm_app_service_plan" "asp" {
   name                = var.app_service_plan_name
   location            = var.rg_location
@@ -30,5 +39,6 @@ resource "azurerm_app_service" "as" {
       "index.php",
       "hostingstart.html",
     ]
+    ip_restriction = var.ip_restrictions
   }
 }

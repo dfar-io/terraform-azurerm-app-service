@@ -16,6 +16,8 @@ variable "tier" {
 variable "size" {
   description = "App Service Plan size."
 }
+
+/* optional */
 variable "app_settings" {
   description = "App Service's configuration values."
   default     = {}
@@ -31,4 +33,16 @@ variable "https_only" {
 variable "use_32_bit_worker_process" {
   description = "Whether the App Service should use the 32-bit worker process (needed for free plans, will be overwritten if Free tier selected)."
   default     = false
+}
+variable "ip_restrictions" {
+  description = "A list of IP addresses allowed to access the App Service."
+  type = list(object({
+    ip_address = string
+    name = string
+    action = string
+    priority = number
+    virtual_network_subnet_id = string
+    subnet_id = string
+  }))
+  default     = []
 }

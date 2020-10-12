@@ -8,9 +8,11 @@ terraform {
 }
 
 resource "azurerm_app_service_plan" "asp" {
-  name                = var.app_service_plan_name
+  name                = var.app_service_plan_name != null ? var.app_service_plan_name : "${var.name}-asp"
   location            = var.rg_location
   resource_group_name = var.rg_name
+  kind                = var.is_containerized ? "Linux" : var.app_service_plan_kind
+  reserved            = var.app_service_plan_kind == "Linux" || var.is_containerized
 
   sku {
     tier = var.tier
@@ -39,6 +41,24 @@ resource "azurerm_app_service" "as" {
       "index.php",
       "hostingstart.html",
     ]
-    ip_restriction = var.ip_restrictions
+    
+    dynamic "ip_restriction" {
+      for_each = var.ip_restrictions
+      content {
+        ip_address = ip_restriction.value["cidr_ip"]
+        name       = ip_restriction.value["name"]
+        action     = "Allow"
+        priority   = ip_restriction.key + 1
+      }
+    }
+
+    linux_fx_version = var.is_containerized ? "DOCKER|${var.registry_name}/${var.image_name}:latest" : ""
+  }
+
+  # will deploy image above once, then ignore for future deployments
+  lifecycle {
+    ignore_changes = [
+      site_config.0.linux_fx_version
+    ]
   }
 }

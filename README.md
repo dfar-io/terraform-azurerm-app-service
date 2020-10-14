@@ -60,3 +60,19 @@ module "app-service" {
   ]
 }
 ```
+
+### Create App Service with Connection Strings
+
+```
+module "app-service" {
+  source       = "dfar-io/app-service/azurerm"
+  name         = "APP_SERVICE_NAME"
+  rg_location  = azurerm_resource_group.rg.location
+  rg_name      = azurerm_resource_group.rg.name
+  connection_strings = {
+      name  = "NAME"
+      type  = "SQLServer"
+      value = "CONNECTION_STRING_VALUE"
+  }
+}
+```

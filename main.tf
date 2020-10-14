@@ -55,6 +55,15 @@ resource "azurerm_app_service" "as" {
     linux_fx_version = var.is_containerized ? "DOCKER|${var.registry_name}/${var.image_name}:latest" : ""
   }
 
+  dynamic "connection_string" {
+    for_each = var.connection_strings
+    content {
+      name  = connection_string.value["name"]
+      type  = connection_string.value["type"]
+      value = connection_string.value["value"]
+    }
+  }
+
   # will deploy image above once, then ignore for future deployments
   lifecycle {
     ignore_changes = [

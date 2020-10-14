@@ -66,3 +66,12 @@ variable "image_name" {
   type = string
   default = ""
 }
+variable "connection_strings" {
+  description = "Collection of connection string objects to create with App Service."
+  default = []
+  type = list(object({
+    name  = string
+    type  = string
+    value = string
+  }))
+}

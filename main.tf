@@ -28,7 +28,7 @@ resource "azurerm_app_service" "as" {
   app_settings        = var.app_settings
   https_only          = var.https_only
   site_config {
-    dotner_framework_version  = var.dotnet_framework_version
+    dotnet_framework_version  = var.dotnet_framework_version
     always_on                 = var.always_on
     use_32_bit_worker_process = var.tier == "Free" ? true : var.use_32_bit_worker_process
     default_documents = [

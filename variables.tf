@@ -75,3 +75,8 @@ variable "connection_strings" {
     value = string
   }))
 }
+variable "dotnet_framework_version" {
+  description = "App Service .NET runtime version."
+  default = "v4.0"
+  type = string
+}

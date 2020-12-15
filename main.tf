@@ -30,7 +30,7 @@ resource "azurerm_app_service" "as" {
   site_config {
     dotnet_framework_version  = var.dotnet_framework_version
     always_on                 = var.always_on
-    use_32_bit_worker_process = var.tier == "Free" ? true : var.use_32_bit_worker_process
+    use_32_bit_worker_process = var.tier == "Free" || var.tier == "Shared" ? true : var.use_32_bit_worker_process
     default_documents = [
       "Default.htm",
       "Default.html",

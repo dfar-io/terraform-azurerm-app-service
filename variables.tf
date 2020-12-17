@@ -80,3 +80,13 @@ variable "dotnet_framework_version" {
   default = "v4.0"
   type = string
 }
+variable "application_logs_file_system_level" {
+  description = "Level of logs to record for Application logs (filesystem)."
+  default = "Off"
+  type = string
+}
+variable "is_blue_green_deployment_enabled" {
+  description = "Whether this app service uses a deployment slot to promote blue-green deployments."
+  default = false
+  type = bool
+}
